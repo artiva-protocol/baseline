@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Navigation } from "@artiva/shared";
 import { useRouter } from "next/router";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 
 const Header = ({
   navigation,

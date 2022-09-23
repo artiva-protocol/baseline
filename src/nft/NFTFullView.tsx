@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import NFTMarketView from "./NFTMarketView";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 import { EditionContractLike } from "@artiva/shared";
 
 export const NFTFullView = ({

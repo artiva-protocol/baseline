@@ -1,6 +1,6 @@
 import { ArtivaContextType, Platform } from "@artiva/shared";
 import React from "react";
-import useColorScheme from "../src/hooks/useColorScheme";
+import useColorScheme from "../hooks/useColorScheme";
 import ThemeContext from "./ThemeContext";
 
 const GlobalProvider = ({

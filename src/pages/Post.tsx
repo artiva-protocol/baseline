@@ -1,7 +1,7 @@
 import React from "react";
 import PostFullView from "../post/PostFullView";
 import Header from "../components/Header";
-import GlobalProvider from "../../context/GlobalProvider";
+import GlobalProvider from "../context/GlobalProvider";
 import { Post, PostProps } from "@artiva/shared";
 
 const Post = ({ ctx, post, platform }: PostProps) => {

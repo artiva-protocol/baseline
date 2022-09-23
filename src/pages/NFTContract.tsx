@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../components/Header";
 import NFTContractFullView from "../nftContract/NFTContractFullView";
-import GlobalProvider from "../../context/GlobalProvider";
+import GlobalProvider from "../context/GlobalProvider";
 import { NFTContractProps } from "@artiva/shared";
 
 const NFTContract = ({ ctx, nftContract, platform }: NFTContractProps) => {

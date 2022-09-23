@@ -1,6 +1,6 @@
 import { NFTObject } from "@zoralabs/nft-hooks";
 import React, { Fragment, useContext } from "react";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 
 export const NFTPreview = ({ nft }: { nft?: NFTObject }) => {
   const { components, hooks } = useContext(ThemeContext)!;

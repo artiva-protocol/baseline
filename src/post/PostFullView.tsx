@@ -2,7 +2,7 @@ import React, { Fragment, useContext } from "react";
 import { Post, PostTypeEnum } from "@artiva/shared";
 import NFTFullView from "../nft/NFTFullView";
 import NFTContractFullView from "../nftContract/NFTContractFullView";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 
 const PostFullView = ({ post }: { post: Post }) => {
   const { type, content } = post;

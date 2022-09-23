@@ -1,7 +1,7 @@
 import { NFTObject } from "@zoralabs/nft-hooks";
 import React, { Fragment, useContext } from "react";
 import { useRouter } from "next/router";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 import { EditionContractLike } from "@artiva/shared";
 
 const NFTMarketView = ({

@@ -3,7 +3,7 @@ import { Post, PostTypeEnum } from "@artiva/shared";
 import NFTPreview from "../nft/NFTPreview";
 import NFTContractPreview from "../nftContract/NFTContractPreview";
 import { useRouter } from "next/router";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 
 const PostComponent = ({ post }: { post: Post }) => {
   const { type, content } = post;

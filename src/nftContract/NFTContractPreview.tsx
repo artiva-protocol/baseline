@@ -5,7 +5,7 @@ import {
   NFTContractObject,
 } from "@artiva/shared";
 import { NFTObject } from "@zoralabs/nft-hooks";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 
 const NFTContractPreview = ({ contract }: { contract: NFTContractObject }) => {
   const { collection, aggregateStat } = contract;

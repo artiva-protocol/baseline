@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import dynamic from "next/dynamic";
 import { HomeProps } from "@artiva/shared";
-import GlobalProvider from "../../context/GlobalProvider";
+import GlobalProvider from "../context/GlobalProvider";
 import { CustomPropertiesType } from "../../artiva.config";
 import Footer from "../components/Footer";
 

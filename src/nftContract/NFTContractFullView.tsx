@@ -7,7 +7,7 @@ import {
   NFTIdentifier,
   NFTContractObject,
 } from "@artiva/shared";
-import ThemeContext from "../../context/ThemeContext";
+import ThemeContext from "../context/ThemeContext";
 
 const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
   const { hooks, components } = useContext(ThemeContext)!;
