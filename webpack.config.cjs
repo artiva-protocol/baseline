@@ -47,7 +47,7 @@ module.exports = {
     new ModuleFederationPlugin({
       name: "theme",
       filename: "remoteEntry.js",
-      library: { type: "var", name: "theme" },
+      library: { type: "window", name: "theme" },
       exposes: {
         "./Home": "./src/pages/Home",
         "./NFT": "./src/pages/NFT",

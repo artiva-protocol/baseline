@@ -72,7 +72,7 @@ export const NFTFullView = ({
 
           <div className="mt-6">
             <div className="font-light text-gray-500 text-sm">Description</div>
-            <h3 className="mt-1 text-lg text-gray-600 w-full">
+            <h3 className="mt-1 text-lg text-gray-600 w-full break-all whitespace-pre-wrap">
               {nft?.metadata?.description}
             </h3>
           </div>

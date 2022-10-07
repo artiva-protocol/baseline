@@ -12,7 +12,7 @@ const NFTContractPreview = ({ contract }: { contract: NFTContractObject }) => {
   const identifier: NFTIdentifier = {
     chain: collection?.networkInfo?.network as ChainIdentifier,
     contractAddress: collection?.address,
-    tokenId: "1",
+    tokenId: contract.aggregateStat?.nftCount?.toString() || "1",
   };
   const { hooks, components } = useContext(ThemeContext)!;
   const { useNFT } = hooks;

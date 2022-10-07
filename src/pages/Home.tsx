@@ -25,7 +25,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
     }
   };
 
-  const { data: posts } = usePosts();
+  const { data: posts } = usePosts({ featured: true });
 
   const showingCover = custom.show_platform_cover && platform.cover_image;
 
