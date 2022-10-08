@@ -133,7 +133,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
             )}
           </Fragment>
         </div>
-        <div className="grid gap-6 grid-cols-3 mx-6 mt-6">
+        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-6 mt-6">
           {posts?.map((x: any) => (
             <PostPreview post={x} />
           ))}

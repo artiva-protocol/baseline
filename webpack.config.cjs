@@ -12,6 +12,11 @@ module.exports = {
     filename: "[name].bundle.js",
     chunkFilename: "[name].bundle.js",
   },
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "dist"),
+    },
+  },
   module: {
     rules: [
       {

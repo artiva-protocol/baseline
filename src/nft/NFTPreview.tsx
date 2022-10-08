@@ -69,14 +69,14 @@ export const NFTPreview = ({ nft }: { nft?: NFTObject }) => {
 
   return (
     <div className="shadow-sm rounded-md">
-      <div className="relative w-full cursor-pointer h-[80vh] text-left">
+      <div className="relative w-full cursor-pointer h-[60vh] sm:h-[80vh] text-left">
         <div className="opacity-0 hover:opacity-100 transition-opacity bg-black/[.6] absolute top-0 left-0 z-30 w-full h-full rounded-md overflow-none">
           <div className="z-20 text-white absolute top-0 left-0 w-full p-5">
             <h2 className="text-4xl font-semibold">{nft?.metadata?.name}</h2>
             <div className="bg-black/[.4] text-white rounded-md text-center inline-block px-4 py-1 mt-4">
               {nft?.nft?.contract.name}
             </div>
-            <h3 className="mt-6 text-lg font-light text-gray-300 break-all whitespace-pre-wrap">
+            <h3 className="mt-6 text-lg font-light text-gray-300 break-word whitespace-pre-wrap">
               {(nft?.metadata?.description?.length || 0) > 200
                 ? `${nft?.metadata?.description?.slice(0, 200)}...`
                 : nft?.metadata?.description}

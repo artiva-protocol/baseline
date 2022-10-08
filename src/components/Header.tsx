@@ -18,7 +18,7 @@ const Header = ({
 
   return (
     <div
-      className={`top-4 px-20 flex items-center justify-between w-full py-4 border border-b`}
+      className={`top-4 px-10 flex items-center justify-between w-full py-4 border border-b`}
     >
       <div className="flex items-center">
         <button

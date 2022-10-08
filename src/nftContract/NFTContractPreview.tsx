@@ -20,7 +20,7 @@ const NFTContractPreview = ({ contract }: { contract: NFTContractObject }) => {
   const { data: nft } = useNFT(identifier);
 
   return (
-    <div className="h-[80vh] relative">
+    <div className="h-[60vh] sm:h-[80vh] relative">
       <div className="absolute bg-black/[.4] top-5 right-8 z-30 text-white px-4 py-1 text-xs rounded-md">
         {collection?.symbol}
       </div>
