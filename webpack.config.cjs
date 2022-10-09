@@ -50,7 +50,7 @@ module.exports = {
   },
   plugins: [
     new ModuleFederationPlugin({
-      name: "theme",
+      name: "baseline",
       filename: "remoteEntry.js",
       library: { type: "window", name: "theme" },
       exposes: {

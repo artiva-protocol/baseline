@@ -3,3 +3,6 @@ dist
 .env.local
 .DS_Store
 **/.DS_Store
+dist-id.txt
+dist-manifest.csv
+dist-manifest.json

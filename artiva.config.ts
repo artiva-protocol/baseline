@@ -10,7 +10,7 @@ export type CustomPropertiesType = {
 
 const config: ThemeConfig = {
   name: "baseline",
-  version: "0.0.1",
+  version: "1.0.0",
   engines: {
     artiva: "0.1.0",
   },
