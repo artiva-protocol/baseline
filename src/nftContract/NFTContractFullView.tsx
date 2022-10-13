@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { Fragment, useContext, useMemo } from "react";
 import NFTPreview from "../nft/NFTPreview";
 import { NFTObject } from "@zoralabs/nft-hooks";
 import { useRouter } from "next/router";
@@ -8,18 +8,13 @@ import {
   NFTContractObject,
 } from "@artiva/shared";
 import ThemeContext from "../context/ThemeContext";
+import { PRIMARY_SALE_TYPES } from "@artiva/shared/dist/types/nft/NFTContractObject";
 
 const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
-  const { hooks, components } = useContext(ThemeContext)!;
+  const { hooks } = useContext(ThemeContext)!;
   const { useNFTTokens } = hooks;
-  const { CountdownDisplay } = components;
-  const { collection, aggregateStat } = contract;
-  const router = useRouter();
 
-  const edition = useMemo(
-    () => contract.markets?.find((x) => x.source === "ZoraERC721Drop"),
-    [contract.markets]
-  );
+  const { collection } = contract;
 
   const { data: nfts } = useNFTTokens({
     collectionAddresses: collection?.address
@@ -28,24 +23,45 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
     limit: 20,
   });
 
-  const nftsComponent = () => {
-    return nfts?.tokens?.map((x: any) => (
-      <NFTPreviewWrapper
-        identifier={{
-          contractAddress: collection?.address,
-          tokenId: x.token.tokenId,
-          chain: collection.networkInfo!.network as ChainIdentifier,
-        }}
-      />
-    ));
-  };
-
-  const saleEnded = edition
-    ? Date.now() / 1000 > parseInt(edition.salesConfig.publicSaleEnd!)
-    : undefined;
-
   return (
     <div className="mt-10">
+      <Header contract={contract} />
+      <div className="grid gap-6 grid-cols-1 sm:grid-cols-3 mx-6 mt-6">
+        {nfts?.tokens?.map((x: any) => (
+          <NFTPreviewWrapper
+            identifier={{
+              contractAddress: collection?.address,
+              tokenId: x.token.tokenId,
+              chain: collection.networkInfo!.network as ChainIdentifier,
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
+
+const Header = ({ contract }: { contract: NFTContractObject }) => {
+  const { components } = useContext(ThemeContext)!;
+  const { collection, aggregateStat } = contract;
+  const edition = useMemo(
+    () =>
+      contract.markets?.find(
+        (x) => x.type === PRIMARY_SALE_TYPES.PublicEdition
+      ),
+    [contract.markets]
+  );
+
+  const saleEnded = edition
+    ? Date.now() / 1000 > parseInt(edition.endTime!)
+    : undefined;
+
+  const { CountdownDisplay } = components;
+
+  const router = useRouter();
+
+  return (
+    <Fragment>
       <div className="ml-10">
         <div className="text-black text-xs rounded-md">
           {collection?.symbol}
@@ -59,12 +75,12 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
                 onClick={() => {
                   router.push(router.asPath + "/mint");
                 }}
-                className="text-lg mt-4 text-sm bg-black text-white px-4 w-48 py-1 inline-block rounded-full mr-2"
+                className="text-lg mt-4 bg-black text-white px-4 w-48 py-1 inline-block rounded-full mr-2"
               >
                 {saleEnded ? "Minting Complete" : "Mint Edition"}
               </button>
             )}
-            <div className="text-lg mt-4 text-sm border border-gray-400 text-gray-400 px-4 py-1 inline-block rounded-full">
+            <div className="text-lg mt-4 border border-gray-400 text-gray-400 px-4 py-1 inline-block rounded-full">
               {collection?.address
                 ? collection.address.slice(0, 6) +
                   "..." +
@@ -79,17 +95,11 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
         <div className="mr-12">{aggregateStat?.ownerCount} Owners</div>
         {!saleEnded && edition && (
           <div>
-            <CountdownDisplay
-              to={parseInt(edition!.salesConfig.publicSaleEnd!)}
-            />{" "}
-            left
+            <CountdownDisplay to={parseInt(edition!.endTime!)} /> left
           </div>
         )}
       </div>
-      <div className="grid gap-6 grid-cols-1 sm:grid-cols-3 mx-6 mt-6">
-        {nftsComponent()}
-      </div>
-    </div>
+    </Fragment>
   );
 };
 

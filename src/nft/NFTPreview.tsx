@@ -2,7 +2,7 @@ import { NFTObject } from "@zoralabs/nft-hooks";
 import React, { Fragment, useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
 
-export const NFTPreview = ({ nft }: { nft?: NFTObject }) => {
+export const NFTPreview = React.memo(({ nft }: { nft?: NFTObject }) => {
   const { components, hooks } = useContext(ThemeContext)!;
   const { AvatarView, AddressView, CountdownDisplay, NFTRenderer } = components;
   const { useFindAuction, useFindAsk } = hooks;
@@ -116,6 +116,6 @@ export const NFTPreview = ({ nft }: { nft?: NFTObject }) => {
       </div>
     </div>
   );
-};
+});
 
 export default NFTPreview;

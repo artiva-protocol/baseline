@@ -29,24 +29,20 @@ const NFTMarketView = ({
       <div className={border}>
         <div className="text-gray-500 text-lg font-light">Price</div>
         <div className="flex flex-col">
-          <span className="text-black text-3xl">
-            {edition.salesConfig.publicSalePrice} ETH
-          </span>
+          <span className="text-black text-3xl">{edition.price} ETH</span>
         </div>
         <PrimarySalePurchaseButton
           primarySale={edition}
           address={nft?.nft?.contract.address || ""}
           quantity={1}
-          className="bg-black mt-4 text-white w-full flex items-center justify-around h-12 rounded-md w-full"
+          className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
         >
           Mint
         </PrimarySalePurchaseButton>
         <div className="mt-4 w-full flex text-gray-400 justify-around">
           <div className="flex items-baseline">
             <span className="mr-2">
-              <CountdownDisplay
-                to={parseInt(edition.salesConfig.publicSaleEnd!)}
-              />
+              <CountdownDisplay to={parseInt(edition.endTime!)} />
             </span>
             <span>left</span>
           </div>
@@ -74,7 +70,7 @@ const NFTMarketView = ({
           onClick={() => {
             router.push(router.asPath + "/buy");
           }}
-          className="bg-black mt-4 text-white w-full flex items-center justify-around h-12 rounded-md w-full"
+          className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
         >
           Buy Now
         </button>
@@ -115,7 +111,7 @@ const NFTMarketView = ({
             onClick={() => {
               router.push(router.asPath + "/bid");
             }}
-            className="bg-black mt-4 text-white w-full flex items-center justify-around h-12 rounded-md w-full"
+            className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
           >
             Place Bid
           </button>
@@ -144,7 +140,7 @@ const NFTMarketView = ({
             onClick={() => {
               router.push(router.asPath + "/bid");
             }}
-            className="bg-black mt-4 text-white w-full flex items-center justify-around h-12 rounded-md w-full"
+            className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
           >
             Place Bid
           </button>

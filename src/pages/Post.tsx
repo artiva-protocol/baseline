@@ -2,9 +2,9 @@ import React from "react";
 import PostFullView from "../post/PostFullView";
 import Header from "../components/Header";
 import GlobalProvider from "../context/GlobalProvider";
-import { Post, PostProps } from "@artiva/shared";
+import { PostProps } from "@artiva/shared";
 
-const Post = ({ ctx, post, platform }: PostProps) => {
+const PostComponent = ({ ctx, post, platform }: PostProps) => {
   return (
     <GlobalProvider ctx={ctx} platform={platform}>
       <div className="mb-20">
@@ -21,4 +21,4 @@ const Post = ({ ctx, post, platform }: PostProps) => {
   );
 };
 
-export default Post;
+export default PostComponent;
