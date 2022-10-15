@@ -76,7 +76,7 @@ export const NFTPreview = React.memo(({ nft }: { nft?: NFTObject }) => {
             <div className="bg-black/[.4] text-white rounded-md text-center inline-block px-4 py-1 mt-4">
               {nft?.nft?.contract.name}
             </div>
-            <h3 className="mt-6 text-lg font-light text-gray-300 break-word whitespace-pre-wrap">
+            <h3 className="mt-6 text-lg font-light text-gray-300 break-word whitespace-pre-wrap max-h-[50vh] overflow-hidden">
               {(nft?.metadata?.description?.length || 0) > 200
                 ? `${nft?.metadata?.description?.slice(0, 200)}...`
                 : nft?.metadata?.description}

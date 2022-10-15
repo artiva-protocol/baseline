@@ -1,7 +1,6 @@
 import { NFTObject } from "@zoralabs/nft-hooks";
 import React, { useContext } from "react";
 import NFTMarketView from "./NFTMarketView";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import ThemeContext from "../context/ThemeContext";
 import { EditionContractLike } from "@artiva/shared";
@@ -13,10 +12,9 @@ export const NFTFullView = ({
   nft?: NFTObject;
   edition?: EditionContractLike;
 }) => {
-  const router = useRouter();
   const [loaded, setLoaded] = useState(false);
   const { components } = useContext(ThemeContext)!;
-  const { NFTRenderer, AddressView } = components;
+  const { NFTRenderer, AddressView, Link } = components;
 
   return (
     <div className="w-full bg-gray-100">
@@ -53,16 +51,11 @@ export const NFTFullView = ({
             {nft?.nft?.contract.name && (
               <div className="ml-8">
                 <div className="font-light text-gray-500 text-sm">Contract</div>
-                <button
-                  onClick={() => {
-                    router.push(
-                      `/assets/ETHEREUM/${nft?.nft?.contract.address}`
-                    );
-                  }}
-                  className="bg-black text-white rounded-md text-center inline-block px-4 py-1 mt-1"
-                >
-                  {nft?.nft?.contract.name}
-                </button>
+                <Link href={`/assets/ETHEREUM/${nft?.nft?.contract.address}`}>
+                  <a className="bg-black text-white rounded-md text-center inline-block px-4 py-1 mt-1">
+                    {nft?.nft?.contract.name}
+                  </a>
+                </Link>
               </div>
             )}
           </div>

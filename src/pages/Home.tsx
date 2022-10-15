@@ -36,13 +36,14 @@ const Home = ({ ctx, platform }: HomeProps) => {
           className="relative"
           style={{ height: showingCover ? "80vh" : "60vh" }}
         >
-          <div className="absolute z-30 top-4 px-10 flex items-center justify-between w-full">
-            <div className="flex items-center">
+          <div className="absolute z-30 top-0 py-8 px-10 flex items-center justify-between w-full">
+            <div className="flex items-baseline">
               {custom.show_logo_in_navigation && (
                 <Fragment>
                   {platform?.logo ? (
                     <Image
-                      className="w-10 h-10 mr-4"
+                      alt="logo"
+                      className="w-10 h-10 mr-10"
                       src={platform?.logo}
                       width={300}
                       height={300}
@@ -53,7 +54,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                         showingCover
                           ? "text-white"
                           : "text-black dark:text-white"
-                      } text-2xl font-semibold`}
+                      } text-2xl mr-10 font-semibold`}
                     >
                       {platform?.title}
                     </h1>
@@ -62,7 +63,11 @@ const Home = ({ ctx, platform }: HomeProps) => {
               )}
               {platform?.navigation && (
                 <Nav
-                  className="text-white text-xl font-light mr-10"
+                  className={`${
+                    showingCover
+                      ? "text-gray-800"
+                      : "text-gray-800 dark:text-white"
+                  } text-lg mr-10`}
                   navigation={platform?.navigation}
                 />
               )}
@@ -95,6 +100,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                   <Fragment>
                     {platform?.logo ? (
                       <Image
+                        alt="logo"
                         className="w-28 h-28"
                         src={platform?.logo}
                         width={600}

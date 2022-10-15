@@ -1,6 +1,5 @@
 import { NFTObject } from "@zoralabs/nft-hooks";
 import React, { Fragment, useContext } from "react";
-import { useRouter } from "next/router";
 import ThemeContext from "../context/ThemeContext";
 import { EditionContractLike } from "@artiva/shared";
 
@@ -11,10 +10,8 @@ const NFTMarketView = ({
   nft?: NFTObject;
   edition?: EditionContractLike;
 }) => {
-  const router = useRouter();
-
   const { components, hooks } = useContext(ThemeContext)!;
-  const { PricingString, CountdownDisplay, PrimarySalePurchaseButton } =
+  const { PricingString, CountdownDisplay, PrimarySalePurchaseButton, Link } =
     components;
   const { useFindAuction, useFindAsk } = hooks;
 
@@ -66,14 +63,13 @@ const NFTMarketView = ({
             }}
           />
         </div>
-        <button
-          onClick={() => {
-            router.push(router.asPath + "/buy");
-          }}
-          className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
+        <Link
+          href={`/assets/ETHEREUM/${nft?.nft?.contract.address}/${nft?.nft?.tokenId}/buy`}
         >
-          Buy Now
-        </button>
+          <a className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full">
+            Buy Now
+          </a>
+        </Link>
       </div>
     );
   };
@@ -107,14 +103,13 @@ const NFTMarketView = ({
               </span>
             </div>
           </div>
-          <button
-            onClick={() => {
-              router.push(router.asPath + "/bid");
-            }}
-            className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
+          <Link
+            href={`/assets/ETHEREUM/${nft?.nft?.contract.address}/${nft?.nft?.tokenId}/bid`}
           >
-            Place Bid
-          </button>
+            <a className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full">
+              Place Bid
+            </a>
+          </Link>
         </div>
       );
 
@@ -136,14 +131,13 @@ const NFTMarketView = ({
               />
             </div>
           </div>
-          <button
-            onClick={() => {
-              router.push(router.asPath + "/bid");
-            }}
-            className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
+          <Link
+            href={`/assets/ETHEREUM/${nft?.nft?.contract.address}/${nft?.nft?.tokenId}/bid`}
           >
-            Place Bid
-          </button>
+            <a className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full">
+              Place Bid
+            </a>
+          </Link>
         </div>
       );
   };

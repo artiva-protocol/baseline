@@ -57,7 +57,6 @@ module.exports = {
         "./Home": "./src/pages/Home",
         "./NFT": "./src/pages/NFT",
         "./NFTContract": "./src/pages/NFTContract",
-        "./Post": "./src/pages/Post",
         "./artiva.config": "./artiva.config",
       },
       shared: {
@@ -67,46 +66,6 @@ module.exports = {
           requiredVersion: false,
         },
         "react-dom": {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        "next/router": {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        "next/link": {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        "next/future/image": {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        lodash: {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        "@artiva/shared": {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        wagmi: {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        "@headlessui/react": {
-          singleton: true,
-          version: "0",
-          requiredVersion: false,
-        },
-        "@rainbow-me/rainbowkit": {
           singleton: true,
           version: "0",
           requiredVersion: false,

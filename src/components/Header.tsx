@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import { Navigation } from "@artiva/shared";
-import { useRouter } from "next/router";
 import ThemeContext from "../context/ThemeContext";
 
 const Header = ({
@@ -13,32 +12,36 @@ const Header = ({
   title: string;
 }) => {
   const { components } = useContext(ThemeContext)!;
-  const { Nav, ConnectButton, CustomConnectButton, Image } = components;
-  const { push } = useRouter();
+  const { Nav, ConnectButton, CustomConnectButton, Image, Link } = components;
 
   return (
     <div
-      className={`top-4 px-10 flex items-center justify-between w-full py-4 border border-b`}
+      className={`top-4 px-10 flex items-center justify-between w-full py-8 border border-b`}
     >
       <div className="flex items-center">
-        <button
-          onClick={() => {
-            push("/");
-          }}
-        >
-          {logo ? (
-            <Image
-              src={logo}
-              alt="logo"
-              className="w-8 mr-10 cursor-pointer"
-              height={600}
-              width={600}
-            />
-          ) : (
-            <div className="font-semibold text-gray-800">{title}</div>
-          )}
-        </button>
-        {navigation && Nav}
+        <Link href={"/"}>
+          <a>
+            {logo ? (
+              <Image
+                src={logo}
+                alt="logo"
+                className="w-8 mr-10 cursor-pointer"
+                height={600}
+                width={600}
+              />
+            ) : (
+              <div className="font-semibold text-xl text-gray-800 mr-10">
+                {title}
+              </div>
+            )}
+          </a>
+        </Link>
+        {navigation && (
+          <Nav
+            className={`text-gray-800 dark:text-white mr-10`}
+            navigation={navigation}
+          />
+        )}
       </div>
       <div className="text-center">
         {ConnectButton && (

@@ -2,18 +2,15 @@ import React, { Fragment, useContext } from "react";
 import { Post, PostTypeEnum } from "@artiva/shared";
 import NFTPreview from "../nft/NFTPreview";
 import NFTContractPreview from "../nftContract/NFTContractPreview";
-import { useRouter } from "next/router";
 import ThemeContext from "../context/ThemeContext";
 
 const PostComponent = ({ post }: { post: Post }) => {
   const { type, content } = post;
-  const { hooks } = useContext(ThemeContext)!;
+  const {
+    hooks,
+    components: { Link },
+  } = useContext(ThemeContext)!;
   const { nft, nftContract } = hooks.usePostContent(type, content);
-  const router = useRouter();
-
-  const onClick = () => {
-    router.push(`/post/${post.id}`);
-  };
 
   let postContent = () => {
     switch (type) {
@@ -31,9 +28,9 @@ const PostComponent = ({ post }: { post: Post }) => {
   };
 
   return (
-    <button onClick={onClick}>
+    <Link href={`/post/${post.id}`}>
       <a>{postContent()}</a>
-    </button>
+    </Link>
   );
 };
 

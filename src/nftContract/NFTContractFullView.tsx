@@ -1,7 +1,6 @@
 import React, { Fragment, useContext, useMemo } from "react";
 import NFTPreview from "../nft/NFTPreview";
 import { NFTObject } from "@zoralabs/nft-hooks";
-import { useRouter } from "next/router";
 import {
   ChainIdentifier,
   NFTIdentifier,
@@ -32,7 +31,9 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
             identifier={{
               contractAddress: collection?.address,
               tokenId: x.token.tokenId,
-              chain: collection.networkInfo!.network as ChainIdentifier,
+              chain:
+                (collection.networkInfo?.network as ChainIdentifier) ||
+                "ETHEREUM",
             }}
           />
         ))}
@@ -56,9 +57,7 @@ const Header = ({ contract }: { contract: NFTContractObject }) => {
     ? Date.now() / 1000 > parseInt(edition.endTime!)
     : undefined;
 
-  const { CountdownDisplay } = components;
-
-  const router = useRouter();
+  const { CountdownDisplay, Link } = components;
 
   return (
     <Fragment>
@@ -70,15 +69,14 @@ const Header = ({ contract }: { contract: NFTContractObject }) => {
           <div className="text-4xl font-semibold">{collection?.name}</div>
           <div className="flex">
             {edition && (
-              <button
-                disabled={saleEnded}
-                onClick={() => {
-                  router.push(router.asPath + "/mint");
-                }}
-                className="text-lg mt-4 bg-black text-white px-4 w-48 py-1 inline-block rounded-full mr-2"
+              <Link
+                aria-disabled={saleEnded}
+                href={`/assets/ETHEREUM/${contract.collection.address}/mint`}
               >
-                {saleEnded ? "Minting Complete" : "Mint Edition"}
-              </button>
+                <a className="text-lg mt-4 bg-black text-white px-4 w-48 py-1 rounded-full mr-2 flex items-center justify-around">
+                  {saleEnded ? "Minting Complete" : "Mint Edition"}
+                </a>
+              </Link>
             )}
             <div className="text-lg mt-4 border border-gray-400 text-gray-400 px-4 py-1 inline-block rounded-full">
               {collection?.address
@@ -104,23 +102,22 @@ const Header = ({ contract }: { contract: NFTContractObject }) => {
 };
 
 const NFTPreviewWrapper = ({ identifier }: { identifier: NFTIdentifier }) => {
-  const router = useRouter();
-  const { hooks } = useContext(ThemeContext)!;
+  const {
+    hooks,
+    components: { Link },
+  } = useContext(ThemeContext)!;
   const { useNFT } = hooks;
   const { data: nft } = useNFT(identifier);
 
   return (
-    <button
-      onClick={() => {
-        router.push(
-          `/assets/${identifier.chain}/${identifier.contractAddress}/${identifier.tokenId}`,
-          undefined,
-          { shallow: true }
-        );
-      }}
+    <Link
+      href={`/assets/${identifier.chain}/${identifier.contractAddress}/${identifier.tokenId}`}
+      shallow={true}
     >
-      <NFTPreview nft={nft as NFTObject} />
-    </button>
+      <a>
+        <NFTPreview nft={nft as NFTObject} />
+      </a>
+    </Link>
   );
 };
 
