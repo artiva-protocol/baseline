@@ -43,4 +43,11 @@ const config: ThemeConfig = {
   },
 };
 
+let tmp = {};
+Object.keys(config.custom).map((x) => {
+  (tmp as any)[x] = config.custom[x].default;
+});
+
+export const DefaultCustomProps = { ...tmp } as CustomPropertiesType;
+
 export default config;

@@ -1,10 +1,10 @@
 import { Platform } from "@artiva/shared";
 import { useEffect, useRef } from "react";
-import { CustomPropertiesType } from "../../artiva.config";
+import useCustomProperties from "./useCustomProperties";
 
 const useColorScheme = ({ platform }: { platform: Platform }) => {
   const parentRef = useRef<HTMLDivElement>();
-  const custom: CustomPropertiesType = platform.custom as any;
+  const custom = useCustomProperties({ platform });
 
   useEffect(() => {
     if (!parentRef.current) return;

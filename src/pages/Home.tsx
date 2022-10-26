@@ -1,18 +1,17 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import dynamic from "next/dynamic";
 import { HomeProps } from "@artiva/shared";
 import GlobalProvider from "../context/GlobalProvider";
-import { CustomPropertiesType } from "../../artiva.config";
 import Footer from "../components/Footer";
-
+import useCustomProperties from "../hooks/useCustomProperties";
 const PostPreview = dynamic(() => import("../post/PostPreview"), {
   ssr: false,
 });
 
 const Home = ({ ctx, platform }: HomeProps) => {
-  const { usePosts } = ctx.hooks;
   const { Nav, ConnectButton, CustomConnectButton, Image } = ctx.components;
-  const custom: CustomPropertiesType = platform.custom as any;
+  const { useInfinitePosts } = ctx.hooks;
+  const custom = useCustomProperties({ platform });
 
   const headerStyles = () => {
     switch (custom.header_style) {
@@ -25,7 +24,12 @@ const Home = ({ ctx, platform }: HomeProps) => {
     }
   };
 
-  const { data: posts } = usePosts({ featured: true });
+  const { data, loaderElementRef } = useInfinitePosts({
+    platform: platform.id,
+    limit: 21,
+  });
+
+  const posts = data?.flat();
 
   const showingCover = custom.show_platform_cover && platform.cover_image;
 
@@ -144,6 +148,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
             <PostPreview post={x} />
           ))}
         </div>
+        <div ref={loaderElementRef} />
         <Footer platform={platform} />
       </div>
     </GlobalProvider>

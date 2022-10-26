@@ -14,8 +14,10 @@ const GlobalProvider = ({
 }) => {
   const { parentRef } = useColorScheme({ platform });
   return (
-    <div id="theme" ref={parentRef as any}>
-      <ThemeContext.Provider value={ctx}>{children}</ThemeContext.Provider>
+    <div id="theme">
+      <div ref={parentRef as any}>
+        <ThemeContext.Provider value={ctx}>{children}</ThemeContext.Provider>
+      </div>
     </div>
   );
 };

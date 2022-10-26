@@ -11,22 +11,27 @@ import { PRIMARY_SALE_TYPES } from "@artiva/shared/dist/types/nft/NFTContractObj
 
 const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
   const { hooks } = useContext(ThemeContext)!;
-  const { useNFTTokens } = hooks;
+  const { useInfiniteTokens } = hooks;
 
   const { collection } = contract;
 
-  const { data: nfts } = useNFTTokens({
+  const { data, loaderElementRef } = useInfiniteTokens({
     collectionAddresses: collection?.address
       ? [collection?.address]
       : undefined,
-    limit: 20,
+    limit: 21,
   });
+
+  console.log("data", data);
+  console.log("loaderElementRef", loaderElementRef);
+
+  const nfts = data?.flatMap((x) => x.tokens);
 
   return (
     <div className="mt-10">
       <Header contract={contract} />
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-3 mx-6 mt-6">
-        {nfts?.tokens?.map((x: any) => (
+        {nfts?.map((x: any) => (
           <NFTPreviewWrapper
             identifier={{
               contractAddress: collection?.address,
@@ -38,6 +43,7 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
           />
         ))}
       </div>
+      <div ref={loaderElementRef} />
     </div>
   );
 };
@@ -112,7 +118,6 @@ const NFTPreviewWrapper = ({ identifier }: { identifier: NFTIdentifier }) => {
   return (
     <Link
       href={`/assets/${identifier.chain}/${identifier.contractAddress}/${identifier.tokenId}`}
-      shallow={true}
     >
       <a>
         <NFTPreview nft={nft as NFTObject} />

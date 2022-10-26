@@ -20,13 +20,14 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@artiva/shared": "^0.1.39",
+    "@artiva/shared": "^0.2.1",
     "@types/next": "^9.0.0",
     "@types/react": "17.0.39",
-    "@zoralabs/nft-hooks": "^1.1.8",
+    "@zoralabs/nft-hooks": "^1.1.7",
     "archiver": "^5.3.1",
     "concurrently": "^7.2.2",
     "esbuild-loader": "^2.19.0",
+    "ethers": "^5.7.1",
     "process": "^0.11.10",
     "tailwindcss": "^3.1.8",
     "typescript": "^4.8.4",
