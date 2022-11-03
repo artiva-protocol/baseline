@@ -5,13 +5,7 @@ import { useState } from "react";
 import ThemeContext from "../context/ThemeContext";
 import { EditionContractLike } from "@artiva/shared";
 
-export const NFTFullView = ({
-  nft,
-  edition,
-}: {
-  nft?: NFTObject;
-  edition?: EditionContractLike;
-}) => {
+export const NFTFullView = ({ nft }: { nft?: NFTObject }) => {
   const [loaded, setLoaded] = useState(false);
   const { components } = useContext(ThemeContext)!;
   const { NFTRenderer, AddressView, Link } = components;
@@ -68,7 +62,7 @@ export const NFTFullView = ({
           </div>
         </div>
         <div>
-          <NFTMarketView nft={nft} edition={edition} />
+          <NFTMarketView nft={nft} />
         </div>
       </div>
     </div>

@@ -20,7 +20,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@artiva/shared": "^0.2.1",
+    "@artiva/shared": "^0.2.5",
     "@types/next": "^9.0.0",
     "@types/react": "17.0.39",
     "@zoralabs/nft-hooks": "^1.1.7",

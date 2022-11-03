@@ -1,52 +1,25 @@
 import { NFTObject } from "@zoralabs/nft-hooks";
 import React, { Fragment, useContext } from "react";
 import ThemeContext from "../context/ThemeContext";
-import { EditionContractLike } from "@artiva/shared";
 
-const NFTMarketView = ({
-  nft,
-  edition,
-}: {
-  nft?: NFTObject;
-  edition?: EditionContractLike;
-}) => {
+const NFTMarketView = ({ nft }: { nft?: NFTObject }) => {
   const { components, hooks } = useContext(ThemeContext)!;
   const { PricingString, CountdownDisplay, PrimarySalePurchaseButton, Link } =
     components;
   const { useFindAuction, useFindAsk } = hooks;
 
-  const auction = useFindAuction(nft);
-  const ask = useFindAsk(nft);
+  const { data: secondary } = hooks.useNFTSecondary({
+    contractAddress: nft?.nft?.contract.address as string,
+    chain: "ETHEREUM",
+    tokenId: nft?.nft?.tokenId as string,
+  });
+
+  console.log("secondary", secondary);
+
+  const auction = useFindAuction(secondary);
+  const ask = useFindAsk(secondary);
 
   const border = "flex flex-col border border-gray-200 rounded-3xl p-6";
-
-  const editionView = () => {
-    if (!edition) return <Fragment />;
-    return (
-      <div className={border}>
-        <div className="text-gray-500 text-lg font-light">Price</div>
-        <div className="flex flex-col">
-          <span className="text-black text-3xl">{edition.price} ETH</span>
-        </div>
-        <PrimarySalePurchaseButton
-          primarySale={edition}
-          address={nft?.nft?.contract.address || ""}
-          quantity={1}
-          className="bg-black mt-4 text-white flex items-center justify-around h-12 rounded-md w-full"
-        >
-          Mint
-        </PrimarySalePurchaseButton>
-        <div className="mt-4 w-full flex text-gray-400 justify-around">
-          <div className="flex items-baseline">
-            <span className="mr-2">
-              <CountdownDisplay to={parseInt(edition.endTime!)} />
-            </span>
-            <span>left</span>
-          </div>
-        </div>
-      </div>
-    );
-  };
 
   const askView = () => {
     if (!ask?.amount) return <Fragment />;
@@ -146,7 +119,6 @@ const NFTMarketView = ({
     <Fragment>
       {askView()}
       {auctionView()}
-      {editionView()}
     </Fragment>
   );
 };

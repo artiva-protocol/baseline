@@ -22,9 +22,6 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
     limit: 21,
   });
 
-  console.log("data", data);
-  console.log("loaderElementRef", loaderElementRef);
-
   const nfts = data?.flatMap((x) => x.tokens);
 
   return (
@@ -49,14 +46,20 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
 };
 
 const Header = ({ contract }: { contract: NFTContractObject }) => {
-  const { components } = useContext(ThemeContext)!;
+  const { components, hooks } = useContext(ThemeContext)!;
   const { collection, aggregateStat } = contract;
+
+  const { data: secondary } = hooks.useNFTContractSecondary({
+    contractAddress: collection.address,
+    chain: collection.networkInfo?.network as ChainIdentifier,
+  });
+
   const edition = useMemo(
     () =>
-      contract.markets?.find(
+      secondary?.markets?.find(
         (x) => x.type === PRIMARY_SALE_TYPES.PublicEdition
       ),
-    [contract.markets]
+    [secondary?.markets]
   );
 
   const saleEnded = edition
