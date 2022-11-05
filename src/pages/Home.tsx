@@ -47,7 +47,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                   {platform?.logo ? (
                     <Image
                       alt="logo"
-                      className="w-10 h-10 mr-10"
+                      className="w-full h-8 mr-10 cursor-pointer object-scale-down"
                       src={platform?.logo}
                       width={300}
                       height={300}
@@ -83,6 +83,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                     <CustomConnectButton
                       {...props}
                       connectWalletText={custom.connect_wallet_text}
+                      forceChain={false}
                       className={`${
                         showingCover
                           ? "text-white border-white"
@@ -105,7 +106,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                     {platform?.logo ? (
                       <Image
                         alt="logo"
-                        className="w-28 h-28"
+                        className="w-full max-w-md h-28 object-scale-down"
                         src={platform?.logo}
                         width={600}
                         height={600}

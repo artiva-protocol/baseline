@@ -25,9 +25,9 @@ const Header = ({
               <Image
                 src={logo}
                 alt="logo"
-                className="w-8 mr-10 cursor-pointer"
+                className="w-full h-8 mr-10 cursor-pointer object-scale-down"
                 height={600}
-                width={600}
+                width={1200}
               />
             ) : (
               <div className="font-semibold text-xl text-gray-800 mr-10">
@@ -49,6 +49,7 @@ const Header = ({
             {(props: any) => (
               <CustomConnectButton
                 {...props}
+                forceChain={false}
                 className="flex item-center justify-around border border-gray-400 text-gray-500 w-40 rounded-md text-center"
               />
             )}
