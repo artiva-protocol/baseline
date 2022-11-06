@@ -128,7 +128,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 <h2
                   className={`${
                     showingCover ? "text-white" : "text-black dark:text-white"
-                  } text-2xl font-extralight mt-6 sm:px-24`}
+                  } text-md sm:text-2xl font-extralight mt-6 sm:px-24`}
                 >
                   {platform?.description}
                 </h2>

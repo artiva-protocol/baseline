@@ -70,6 +70,11 @@ module.exports = {
           version: "0",
           requiredVersion: false,
         },
+        "next/router": {
+          singleton: true,
+          version: "0",
+          requiredVersion: false,
+        },
       },
     }),
     new webpack.ProvidePlugin({
