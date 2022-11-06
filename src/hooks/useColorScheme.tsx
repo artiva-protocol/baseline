@@ -14,8 +14,10 @@ const useColorScheme = ({ platform }: { platform: Platform }) => {
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       parentRef.current.classList.add("dark");
+      document.body.style.backgroundColor = "black";
     } else {
       parentRef.current.classList.remove("dark");
+      document.body.style.backgroundColor = "white";
     }
   }, [custom.color_scheme, parentRef]);
 

@@ -37,8 +37,9 @@ const Home = ({ ctx, platform }: HomeProps) => {
     <GlobalProvider ctx={ctx} platform={platform}>
       <div className="pb-20 bg-white dark:bg-black">
         <div
-          className="relative"
-          style={{ height: showingCover ? "80vh" : "60vh" }}
+          className={`relative max-h-screen h-[90vh] ${
+            showingCover ? "sm:h-[80vh]" : "sm:[h-60vh]"
+          }`}
         >
           <div className="absolute z-30 top-0 py-8 px-10 flex items-center justify-between w-full">
             <div className="flex items-baseline">
@@ -127,7 +128,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 <h2
                   className={`${
                     showingCover ? "text-white" : "text-black dark:text-white"
-                  } text-2xl font-extralight mt-6`}
+                  } text-2xl font-extralight mt-6 sm:px-24`}
                 >
                   {platform?.description}
                 </h2>
