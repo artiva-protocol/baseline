@@ -70,7 +70,7 @@ export const NFTPreview = React.memo(({ nft }: { nft?: NFTObject }) => {
   return (
     <div className="shadow-sm rounded-md">
       <div className="relative w-full cursor-pointer h-[60vh] sm:h-[80vh] text-left">
-        <div className="opacity-0 hover:opacity-100 transition-opacity bg-black/[.6] absolute top-0 left-0 z-30 w-full h-full rounded-md overflow-none">
+        <div className="hidden sm:block opacity-0 hover:opacity-100 transition-opacity bg-black/[.6] absolute top-0 left-0 z-30 w-full h-full rounded-md overflow-none">
           <div className="z-20 text-white absolute top-0 left-0 w-full p-5">
             <h2 className="text-4xl font-semibold">{nft?.metadata?.name}</h2>
             <div className="bg-black/[.4] text-white rounded-md text-center inline-block px-4 py-1 mt-4">

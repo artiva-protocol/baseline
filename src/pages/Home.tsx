@@ -37,8 +37,8 @@ const Home = ({ ctx, platform }: HomeProps) => {
     <GlobalProvider ctx={ctx} platform={platform}>
       <div className="pb-20 bg-white dark:bg-black">
         <div
-          className={`relative max-h-screen h-[90vh] ${
-            showingCover ? "sm:h-[80vh]" : "sm:[h-60vh]"
+          className={`relative ${
+            custom.show_platform_cover ? "h-[80vh]" : "h-full py-32"
           }`}
         >
           <div className="absolute z-30 top-0 py-8 px-10 flex items-center justify-between w-full">
@@ -99,7 +99,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
 
           <Fragment>
             <div
-              className={`absolute z-20 text-white p-6 px-10 h-full w-full flex ${headerStyles()}`}
+              className={`z-20 text-white p-6 px-10 h-full w-full flex ${headerStyles()}`}
             >
               <div className={`text-center flex flex-col items-center`}>
                 {!custom.show_logo_in_navigation && (
@@ -107,7 +107,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                     {platform?.logo ? (
                       <Image
                         alt="logo"
-                        className="w-full max-w-md h-28 object-scale-down"
+                        className="w-full max-w-md h-28 object-scale-down z-20"
                         src={platform?.logo}
                         width={600}
                         height={600}
@@ -118,7 +118,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                           showingCover
                             ? "text-white"
                             : "text-black dark:text-white"
-                        } text-5xl font-semibold`}
+                        } text-5xl font-semibold z-20`}
                       >
                         {platform?.title}
                       </h1>
@@ -128,7 +128,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 <h2
                   className={`${
                     showingCover ? "text-white" : "text-black dark:text-white"
-                  } text-md sm:text-2xl font-extralight mt-6 sm:px-24`}
+                  } z-20 text-md sm:text-2xl font-extralight mt-6 sm:px-24`}
                 >
                   {platform?.description}
                 </h2>
@@ -138,7 +138,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
               <Image
                 src={platform?.cover_image}
                 alt="cover"
-                className="object-cover w-full absolute h-full"
+                className="object-cover w-full absolute top-0 left-0 h-full"
                 width={2000}
                 height={2000}
               />
