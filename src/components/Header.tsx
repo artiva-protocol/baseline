@@ -16,7 +16,7 @@ const Header = ({
 
   return (
     <div
-      className={`top-4 px-10 flex items-center justify-between w-full py-8 border border-b`}
+      className={`top-4 px-4 sm:px-10 flex items-center justify-between w-full py-8 border border-b`}
     >
       <div className="flex items-center">
         <Link href={"/"}>

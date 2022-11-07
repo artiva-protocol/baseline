@@ -1,28 +1,20 @@
 import { NFTObject } from "@zoralabs/nft-hooks";
 import React, { useContext } from "react";
 import NFTMarketView from "./NFTMarketView";
-import { useState } from "react";
 import ThemeContext from "../context/ThemeContext";
-import { EditionContractLike } from "@artiva/shared";
 
 export const NFTFullView = ({ nft }: { nft?: NFTObject }) => {
-  const [loaded, setLoaded] = useState(false);
   const { components } = useContext(ThemeContext)!;
   const { NFTRenderer, AddressView, Link } = components;
 
   return (
     <div className="w-full bg-gray-100">
-      <div className="py-14 px-4 flex items-center justify-around relative h-[55vh] sm:h-[80vh]">
+      <div className="py-14 px-4 flex items-center justify-around relative h-full sm:h-[80vh]">
         {nft ? (
           <NFTRenderer
             nft={nft}
             renderingContext={"FULL"}
-            className={`h-full w-auto object-contain ${
-              loaded ? "shadow-2xl" : ""
-            }`}
-            onComponentLoaded={() => {
-              setLoaded(true);
-            }}
+            className={`h-full w-auto object-contain`}
           />
         ) : (
           <span className="mediaLoader"></span>
