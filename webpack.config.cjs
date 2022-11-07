@@ -75,6 +75,11 @@ module.exports = {
           version: "0",
           requiredVersion: false,
         },
+        "@heroicons/react": {
+          singleton: true,
+          version: "0",
+          requiredVersion: false,
+        },
       },
     }),
     new webpack.ProvidePlugin({

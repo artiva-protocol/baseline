@@ -27,7 +27,7 @@ const Header = ({
                 alt="logo"
                 className="w-full h-8 mr-10 cursor-pointer object-scale-down"
                 height={600}
-                width={1200}
+                width={600}
               />
             ) : (
               <div className="font-semibold text-xl text-gray-800 mr-10">
