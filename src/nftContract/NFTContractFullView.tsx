@@ -22,7 +22,10 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
     limit: 21,
   });
 
-  const nfts = data?.flatMap((x) => x.tokens);
+  const burnAddress = "0x0000000000000000000000000000000000000000";
+  const nfts = data
+    ?.flatMap((x) => x.tokens)
+    .filter((x) => x.token.owner !== burnAddress);
 
   return (
     <div className="mt-10">
