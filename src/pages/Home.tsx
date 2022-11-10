@@ -31,6 +31,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
 
   const posts = data?.flat();
 
+  const showingHeader = custom.header_style !== "Hidden";
   const showingCover = custom.show_platform_cover && platform.cover_image;
 
   return (
@@ -38,7 +39,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
       <div className="pb-20 bg-white dark:bg-black">
         <div
           className={`relative ${
-            custom.show_platform_cover ? "h-[80vh]" : "h-full py-32"
+            showingCover ? "h-[80vh]" : showingHeader ? "h-auto" : "h-20"
           }`}
         >
           <div className="absolute z-30 top-0 py-8 px-10 flex items-center justify-between w-full">
@@ -99,9 +100,17 @@ const Home = ({ ctx, platform }: HomeProps) => {
 
           <Fragment>
             <div
-              className={`z-20 text-white p-6 px-10 h-full w-full flex ${headerStyles()}`}
+              className={`z-20 text-white p-6 px-10  ${
+                showingCover ? "h-full" : "h-auto min-h-[50vh]"
+              } w-full flex ${headerStyles()}`}
             >
-              <div className={`text-center flex flex-col items-center`}>
+              <div
+                className={`z-20 ${
+                  custom.header_style === "Left aligned"
+                    ? "text-left"
+                    : "text-center px-20"
+                }`}
+              >
                 {!custom.show_logo_in_navigation && (
                   <Fragment>
                     {platform?.logo ? (
@@ -128,17 +137,17 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 <h2
                   className={`${
                     showingCover ? "text-white" : "text-black dark:text-white"
-                  } z-20 text-md sm:text-2xl font-extralight mt-6 sm:px-24`}
+                  } z-20 text-md sm:text-2xl font-extralight mt-6`}
                 >
                   {platform?.description}
                 </h2>
               </div>
             </div>
-            {platform?.cover_image && showingCover && (
+            {showingCover && (
               <Image
-                src={platform?.cover_image}
+                src={platform?.cover_image!}
                 alt="cover"
-                className="object-cover w-full absolute top-0 left-0 h-full"
+                className="object-cover w-full absolute top-0 left-0 h-full z-10"
                 width={2000}
                 height={2000}
               />
