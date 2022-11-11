@@ -108,7 +108,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 className={`z-20 ${
                   custom.header_style === "Left aligned"
                     ? "text-left"
-                    : "text-center px-20"
+                    : "text-center px-4 sm:px-20 py-20 flex flex-col items-center"
                 }`}
               >
                 {!custom.show_logo_in_navigation && (

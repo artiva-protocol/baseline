@@ -5,9 +5,15 @@ import ThemeContext from "../context/ThemeContext";
 export const NFTPreview = React.memo(({ nft }: { nft?: NFTObject }) => {
   const { components, hooks } = useContext(ThemeContext)!;
   const { AvatarView, AddressView, CountdownDisplay, NFTRenderer } = components;
-  const { useFindAuction, useFindAsk } = hooks;
-  const auction = useFindAuction(nft);
-  const ask = useFindAsk(nft);
+  const { useFindAuction, useFindAsk, useNFTSecondary } = hooks;
+
+  const { data: secondary } = useNFTSecondary({
+    contractAddress: nft?.nft?.contract.address as string,
+    chain: "ETHEREUM",
+    tokenId: nft?.nft?.tokenId as string,
+  });
+  const auction = useFindAuction(secondary);
+  const ask = useFindAsk(secondary);
 
   const auctionComponent = () => {
     if (!auction) <Fragment />;
