@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment } from "react";
 import dynamic from "next/dynamic";
 import { HomeProps } from "@artiva/shared";
 import GlobalProvider from "../context/GlobalProvider";
@@ -127,7 +127,9 @@ const Home = ({ ctx, platform }: HomeProps) => {
                           showingCover
                             ? "text-white"
                             : "text-black dark:text-white"
-                        } text-5xl font-semibold z-20`}
+                        } break-all ${
+                          platform.title.length > 12 ? "text-2xl" : "text-3xl"
+                        }  sm:text-5xl font-semibold z-20`}
                       >
                         {platform?.title}
                       </h1>
@@ -154,9 +156,15 @@ const Home = ({ ctx, platform }: HomeProps) => {
             )}
           </Fragment>
         </div>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-6 mt-6">
+        <div
+          className={
+            "flex flex-wrap items-center justify-center mt-6 mx-0 sm:mx-2"
+          }
+        >
           {posts?.map((x: any) => (
-            <PostPreview post={x} />
+            <div className="w-full sm:w-1/2 md:w-1/3 p-2">
+              <PostPreview post={x} />
+            </div>
           ))}
         </div>
         <div ref={loaderElementRef} />
