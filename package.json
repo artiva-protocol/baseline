@@ -20,7 +20,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@artiva/shared": "^0.2.6",
+    "@artiva/shared": "^0.2.13",
     "@heroicons/react": "^2.0.13",
     "@types/next": "^9.0.0",
     "@types/react": "17.0.39",

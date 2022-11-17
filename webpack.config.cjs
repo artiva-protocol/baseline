@@ -57,6 +57,7 @@ module.exports = {
         "./Home": "./src/pages/Home",
         "./NFT": "./src/pages/NFT",
         "./NFTContract": "./src/pages/NFTContract",
+        "./Tag": "./src/pages/Tag",
         "./artiva.config": "./artiva.config",
       },
       shared: {

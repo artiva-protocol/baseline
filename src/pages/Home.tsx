@@ -156,11 +156,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
             )}
           </Fragment>
         </div>
-        <div
-          className={
-            "flex flex-wrap items-center justify-center mt-6 mx-0 sm:mx-2"
-          }
-        >
+        <div className="flex flex-wrap items-center justify-center mt-6 mx-0 sm:mx-2">
           {posts?.map((x: any) => (
             <div className="w-full sm:w-1/2 md:w-1/3 p-2">
               <PostPreview post={x} />
