@@ -1,9 +1,11 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
 import { HomeProps } from "@artiva/shared";
 import GlobalProvider from "../context/GlobalProvider";
 import Footer from "../components/Footer";
 import useCustomProperties from "../hooks/useCustomProperties";
+import MobileNavigation from "../components/MobileNavigation";
+import { Bars3Icon } from "@heroicons/react/24/solid";
 const PostPreview = dynamic(() => import("../post/PostPreview"), {
   ssr: false,
 });
@@ -12,6 +14,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
   const { Nav, ConnectButton, CustomConnectButton, Image } = ctx.components;
   const { useInfinitePosts } = ctx.hooks;
   const custom = useCustomProperties({ platform });
+  const [navOpen, setNavOpen] = useState(false);
 
   const headerStyles = () => {
     switch (custom.header_style) {
@@ -36,6 +39,12 @@ const Home = ({ ctx, platform }: HomeProps) => {
 
   return (
     <GlobalProvider ctx={ctx} platform={platform}>
+      {navOpen && (
+        <MobileNavigation
+          navigation={platform.navigation}
+          onClose={() => setNavOpen(false)}
+        />
+      )}
       <div className="pb-20 bg-white dark:bg-black">
         <div
           className={`relative ${
@@ -67,18 +76,21 @@ const Home = ({ ctx, platform }: HomeProps) => {
                   )}
                 </Fragment>
               )}
-              {platform?.navigation && (
-                <Nav
-                  className={`${
-                    showingCover
-                      ? "text-gray-800"
-                      : "text-gray-800 dark:text-white"
-                  } text-lg mr-10`}
-                  navigation={platform?.navigation}
-                />
-              )}
+
+              <div className="hidden sm:block">
+                {platform?.navigation && (
+                  <Nav
+                    className={`${
+                      showingCover
+                        ? "text-gray-800"
+                        : "text-gray-800 dark:text-white"
+                    } text-lg mr-10`}
+                    navigation={platform?.navigation}
+                  />
+                )}
+              </div>
             </div>
-            <div className="text-center">
+            <div className="text-center hidden sm:block">
               {ConnectButton && (
                 <ConnectButton>
                   {(props: any) => (
@@ -96,9 +108,15 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 </ConnectButton>
               )}
             </div>
+            <button
+              onClick={() => setNavOpen(true)}
+              className="sm:hidden focus:outline-none"
+            >
+              <Bars3Icon className="h-8 text-gray-700 dark:text-gray-300" />
+            </button>
           </div>
 
-          <Fragment>
+          <div>
             <div
               className={`z-20 text-white p-6 px-10  ${
                 showingCover ? "h-full" : "h-auto min-h-[50vh]"
@@ -154,8 +172,9 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 height={2000}
               />
             )}
-          </Fragment>
+          </div>
         </div>
+
         <div className="flex flex-wrap items-center justify-center mt-6 mx-0 sm:mx-2">
           {posts?.map((x: any) => (
             <div className="w-full sm:w-1/2 md:w-1/3 p-2">

@@ -11,6 +11,7 @@ const useColorScheme = ({ platform }: { platform: Platform }) => {
   useEffect(() => {
     if (!parentRef.current) return;
     const isDark =
+      true ||
       custom.color_scheme === "Dark" ||
       (custom.color_scheme === "Auto" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
@@ -20,7 +21,7 @@ const useColorScheme = ({ platform }: { platform: Platform }) => {
 
     console.log("router", asPath);
 
-    if (isDark && asPath === "/") document.body.style.backgroundColor = "black";
+    if (isDark) document.body.style.backgroundColor = "black";
     else document.body.style.backgroundColor = "white";
   }, [custom.color_scheme, parentRef, asPath]);
 

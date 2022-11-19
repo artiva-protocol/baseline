@@ -10,7 +10,7 @@ export const NFTFullView = ({ nft }: { nft?: NFTObject }) => {
   const { NFTRenderer, AddressView, Link, AvatarView } = components;
 
   return (
-    <div className="w-full bg-gray-100">
+    <div className="w-full bg-gray-100 dark:bg-gray-900">
       <div className="py-14 px-4 flex items-center justify-around relative h-full sm:h-[80vh]">
         {nft ? (
           <NFTRenderer
@@ -23,7 +23,7 @@ export const NFTFullView = ({ nft }: { nft?: NFTObject }) => {
         )}
       </div>
 
-      <div className="grid gap-16 grid-cols-1 sm:grid-cols-2 px-10 sm:px-32 pt-8 bg-white">
+      <div className="grid gap-16 grid-cols-1 sm:grid-cols-2 px-10 sm:px-32 pt-8 bg-white dark:bg-black text-black dark:text-white">
         <div className="w-full">
           <h2 className="text-4xl">{nft?.metadata?.name}</h2>
           <div className="mt-6 flex">
@@ -37,7 +37,7 @@ export const NFTFullView = ({ nft }: { nft?: NFTObject }) => {
                   />
                   <AddressView
                     address={nft?.nft?.minted.address}
-                    className="text-md text-gray-700 ml-2"
+                    className="text-md text-gray-700 dark:text-gray-300 ml-2"
                   />
                 </div>
               )}
@@ -46,7 +46,7 @@ export const NFTFullView = ({ nft }: { nft?: NFTObject }) => {
               <div className="ml-8">
                 <div className="font-light text-gray-500 text-sm">Contract</div>
                 <Link href={`/assets/ETHEREUM/${nft?.nft?.contract.address}`}>
-                  <a className="bg-black text-white text-md rounded-md text-center inline-block px-4 py-1 mt-1">
+                  <a className="bg-black dark:bg-white text-white dark:text-black text-md rounded-md text-center inline-block px-4 py-1 mt-1">
                     {nft?.nft?.contract.name}
                   </a>
                 </Link>
@@ -56,7 +56,7 @@ export const NFTFullView = ({ nft }: { nft?: NFTObject }) => {
 
           <div className="mt-6">
             <div className="font-light text-gray-500 text-sm">Description</div>
-            <h3 className="mt-1 text-lg text-gray-600 w-full break-word whitespace-pre-wrap">
+            <h3 className="mt-1 text-lg text-gray-600 dark:text-gray-400 w-full break-word whitespace-pre-wrap">
               {nft?.metadata?.description}
             </h3>
           </div>
@@ -81,16 +81,16 @@ export const PostInfo = ({ nft }: { nft?: NFTObject }) => {
     <Fragment>
       <div className="mt-6 font-light text-gray-500 text-sm">Post Info</div>
 
-      <div className="mt-1 grid grid-cols-1 gap-2 border-l border-r rounded-md border-gray-300">
+      <div className="mt-1 grid grid-cols-1 gap-2 border-l border-r rounded-md border-gray-300 dark:border-gray-700">
         <a
           href={`https://polygonscan.com/address/${platform}`}
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="border-t border-gray-300 rounded-md p-2 px-4">
+          <div className="border-t border-gray-300 dark:border-gray-700 rounded-md p-2 px-4">
             <div className="text-xs text-gray-400 mt-1">Platform Address</div>
             <div className="flex items-center justify-between">
-              <div className="text-gray-700">{`${platform?.slice(
+              <div className="text-gray-700 dark:text-gray-300">{`${platform?.slice(
                 0,
                 6
               )}...${platform?.slice(
@@ -106,10 +106,10 @@ export const PostInfo = ({ nft }: { nft?: NFTObject }) => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          <div className="border-t border-gray-300 rounded-md p-2 px-4">
+          <div className="border-t border-gray-300 dark:border-gray-700 rounded-md p-2 px-4">
             <div className="text-xs text-gray-400 mt-1">NFT Address</div>
             <div className="flex items-center justify-between">
-              <div className="text-gray-700">{`${contractAddress?.slice(
+              <div className="text-gray-700 dark:text-gray-300">{`${contractAddress?.slice(
                 0,
                 6
               )}...${contractAddress?.slice(
@@ -120,9 +120,9 @@ export const PostInfo = ({ nft }: { nft?: NFTObject }) => {
             </div>
           </div>
         </a>
-        <div className="border-t border-b pb-4 border-gray-300 rounded-md p-2 px-4">
+        <div className="border-t border-b pb-4 border-gray-300 dark:border-gray-700 rounded-md p-2 px-4">
           <div className="text-xs text-gray-400 mt-1">NFT Blockchain</div>
-          <div className="text-gray-700">{"ETHEREUM"}</div>
+          <div className="text-gray-700 dark:text-gray-300">{"ETHEREUM"}</div>
         </div>
       </div>
     </Fragment>
