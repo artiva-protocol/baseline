@@ -11,7 +11,6 @@ const useColorScheme = ({ platform }: { platform: Platform }) => {
   useEffect(() => {
     if (!parentRef.current) return;
     const isDark =
-      true ||
       custom.color_scheme === "Dark" ||
       (custom.color_scheme === "Auto" &&
         window.matchMedia("(prefers-color-scheme: dark)").matches);
