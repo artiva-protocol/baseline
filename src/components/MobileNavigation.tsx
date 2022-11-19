@@ -14,8 +14,6 @@ const MobileNavigation = ({
     components: { Nav, ConnectButton, CustomConnectButton },
   } = useContext(ThemeContext)!;
 
-  if (!navigation) return <Fragment />;
-
   return (
     <div className="fixed z-40 top-0 bg-white dark:bg-black text-black dark:text-white left-0 h-screen w-screen py-8">
       <button
@@ -34,10 +32,12 @@ const MobileNavigation = ({
             />
           )}
         </ConnectButton>
-        <Nav
-          className={`text-2xl text-left text-black dark:text-white border-b dark:border-gray-800 w-full p-8`}
-          navigation={navigation?.filter((x) => !x.secondary)}
-        />
+        {navigation && (
+          <Nav
+            className={`text-2xl text-left text-black dark:text-white border-b dark:border-gray-800 w-full p-8`}
+            navigation={navigation?.filter((x) => !x.secondary)}
+          />
+        )}
       </div>
     </div>
   );
