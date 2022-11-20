@@ -34,7 +34,7 @@ const Header = ({
               <Image
                 src={logo}
                 alt="logo"
-                className="w-full h-8 mr-10 cursor-pointer object-scale-down"
+                className="w-auto h-8 mr-10 cursor-pointer object-scale-down"
                 height={600}
                 width={600}
               />
