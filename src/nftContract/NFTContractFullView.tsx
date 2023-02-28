@@ -22,10 +22,13 @@ const NFTContractFullView = ({ contract }: { contract: NFTContractObject }) => {
     limit: 21,
   });
 
-  const nfts = data?.flatMap((x) => x.tokens);
+  const burnAddress = "0x0000000000000000000000000000000000000000";
+  const nfts = data
+    ?.flatMap((x) => x.tokens)
+    .filter((x) => x.token.owner !== burnAddress);
 
   return (
-    <div className="mt-10">
+    <div className="mt-10 text-black dark:text-white">
       <Header contract={contract} />
       <div className="grid gap-6 grid-cols-1 sm:grid-cols-3 mx-6 mt-6">
         {nfts?.map((x: any) => (
@@ -71,10 +74,8 @@ const Header = ({ contract }: { contract: NFTContractObject }) => {
   return (
     <Fragment>
       <div className="ml-10">
-        <div className="text-black text-xs rounded-md">
-          {collection?.symbol}
-        </div>
-        <div className="text-black text-left mt-4">
+        <div className="text-xs rounded-md">{collection?.symbol}</div>
+        <div className="text-left mt-4">
           <div className="text-4xl font-semibold">{collection?.name}</div>
           <div className="flex">
             {edition && (
@@ -82,7 +83,7 @@ const Header = ({ contract }: { contract: NFTContractObject }) => {
                 aria-disabled={saleEnded}
                 href={`/assets/ETHEREUM/${contract.collection.address}/mint`}
               >
-                <a className="text-lg mt-4 bg-black text-white px-4 w-48 py-1 rounded-full mr-2 flex items-center justify-around">
+                <a className="text-lg mt-4 bg-black dark:bg-white text-white dark:text-black px-4 w-48 py-1 rounded-full mr-2 flex items-center justify-around">
                   {saleEnded ? "Minting Complete" : "Mint Edition"}
                 </a>
               </Link>
@@ -97,7 +98,7 @@ const Header = ({ contract }: { contract: NFTContractObject }) => {
           </div>
         </div>
       </div>
-      <div className="text-gray-400 mt-12 flex border-b pb-2 pl-10">
+      <div className="text-gray-400 dark:text-gray-600 mt-12 flex border-b dark:border-gray-800 pb-2 pl-10">
         <div className="mr-6">{aggregateStat?.nftCount} NFTs</div>
         <div className="mr-12">{aggregateStat?.ownerCount} Owners</div>
         {!saleEnded && edition && (

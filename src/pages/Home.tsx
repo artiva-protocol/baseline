@@ -1,9 +1,11 @@
-import React, { Fragment, useEffect, useRef, useState } from "react";
+import React, { Fragment, useState } from "react";
 import dynamic from "next/dynamic";
 import { HomeProps } from "@artiva/shared";
 import GlobalProvider from "../context/GlobalProvider";
 import Footer from "../components/Footer";
 import useCustomProperties from "../hooks/useCustomProperties";
+import MobileNavigation from "../components/MobileNavigation";
+import { Bars3Icon } from "@heroicons/react/24/solid";
 const PostPreview = dynamic(() => import("../post/PostPreview"), {
   ssr: false,
 });
@@ -12,6 +14,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
   const { Nav, ConnectButton, CustomConnectButton, Image } = ctx.components;
   const { useInfinitePosts } = ctx.hooks;
   const custom = useCustomProperties({ platform });
+  const [navOpen, setNavOpen] = useState(false);
 
   const headerStyles = () => {
     switch (custom.header_style) {
@@ -31,14 +34,22 @@ const Home = ({ ctx, platform }: HomeProps) => {
 
   const posts = data?.flat();
 
+  const showingHeader = custom.header_style !== "Hidden";
   const showingCover = custom.show_platform_cover && platform.cover_image;
 
   return (
     <GlobalProvider ctx={ctx} platform={platform}>
+      {navOpen && (
+        <MobileNavigation
+          navigation={platform.navigation}
+          onClose={() => setNavOpen(false)}
+        />
+      )}
       <div className="pb-20 bg-white dark:bg-black">
         <div
-          className="relative"
-          style={{ height: showingCover ? "80vh" : "60vh" }}
+          className={`relative ${
+            showingCover ? "h-[80vh]" : showingHeader ? "h-auto" : "h-20"
+          }`}
         >
           <div className="absolute z-30 top-0 py-8 px-10 flex items-center justify-between w-full">
             <div className="flex items-baseline">
@@ -47,7 +58,7 @@ const Home = ({ ctx, platform }: HomeProps) => {
                   {platform?.logo ? (
                     <Image
                       alt="logo"
-                      className="w-10 h-10 mr-10"
+                      className="w-full h-8 mr-10 cursor-pointer object-scale-down"
                       src={platform?.logo}
                       width={300}
                       height={300}
@@ -65,24 +76,28 @@ const Home = ({ ctx, platform }: HomeProps) => {
                   )}
                 </Fragment>
               )}
-              {platform?.navigation && (
-                <Nav
-                  className={`${
-                    showingCover
-                      ? "text-gray-800"
-                      : "text-gray-800 dark:text-white"
-                  } text-lg mr-10`}
-                  navigation={platform?.navigation}
-                />
-              )}
+
+              <div className="hidden sm:block">
+                {platform?.navigation && (
+                  <Nav
+                    className={`${
+                      showingCover
+                        ? "text-gray-800"
+                        : "text-gray-800 dark:text-white"
+                    } text-lg mr-10`}
+                    navigation={platform?.navigation}
+                  />
+                )}
+              </div>
             </div>
-            <div className="text-center">
+            <div className="text-center hidden sm:block">
               {ConnectButton && (
                 <ConnectButton>
                   {(props: any) => (
                     <CustomConnectButton
                       {...props}
                       connectWalletText={custom.connect_wallet_text}
+                      forceChain={false}
                       className={`${
                         showingCover
                           ? "text-white border-white"
@@ -93,19 +108,33 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 </ConnectButton>
               )}
             </div>
+            <button
+              onClick={() => setNavOpen(true)}
+              className="sm:hidden focus:outline-none"
+            >
+              <Bars3Icon className="h-8 text-gray-700 dark:text-gray-300" />
+            </button>
           </div>
 
-          <Fragment>
+          <div>
             <div
-              className={`absolute z-20 text-white p-6 px-10 h-full w-full flex ${headerStyles()}`}
+              className={`z-20 text-white p-6 px-10  ${
+                showingCover ? "h-full" : "h-auto min-h-[50vh]"
+              } w-full flex ${headerStyles()}`}
             >
-              <div className={`text-center flex flex-col items-center`}>
+              <div
+                className={`z-20 ${
+                  custom.header_style === "Left aligned"
+                    ? "text-left"
+                    : "text-center px-4 sm:px-20 py-20 flex flex-col items-center"
+                }`}
+              >
                 {!custom.show_logo_in_navigation && (
                   <Fragment>
                     {platform?.logo ? (
                       <Image
                         alt="logo"
-                        className="w-28 h-28"
+                        className="w-full max-w-md h-28 object-scale-down z-20"
                         src={platform?.logo}
                         width={600}
                         height={600}
@@ -116,7 +145,9 @@ const Home = ({ ctx, platform }: HomeProps) => {
                           showingCover
                             ? "text-white"
                             : "text-black dark:text-white"
-                        } text-5xl font-semibold`}
+                        } break-all ${
+                          platform.title.length > 12 ? "text-2xl" : "text-3xl"
+                        }  sm:text-5xl font-semibold z-20`}
                       >
                         {platform?.title}
                       </h1>
@@ -126,26 +157,29 @@ const Home = ({ ctx, platform }: HomeProps) => {
                 <h2
                   className={`${
                     showingCover ? "text-white" : "text-black dark:text-white"
-                  } text-2xl font-extralight mt-6`}
+                  } z-20 text-md sm:text-2xl font-extralight mt-6`}
                 >
                   {platform?.description}
                 </h2>
               </div>
             </div>
-            {platform?.cover_image && showingCover && (
+            {showingCover && (
               <Image
-                src={platform?.cover_image}
+                src={platform?.cover_image!}
                 alt="cover"
-                className="object-cover w-full absolute h-full"
+                className="object-cover w-full absolute top-0 left-0 h-full z-10"
                 width={2000}
                 height={2000}
               />
             )}
-          </Fragment>
+          </div>
         </div>
-        <div className="grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mx-6 mt-6">
+
+        <div className="flex flex-wrap items-center justify-center mt-6 mx-0 sm:mx-2">
           {posts?.map((x: any) => (
-            <PostPreview post={x} />
+            <div className="w-full sm:w-1/2 md:w-1/3 p-2">
+              <PostPreview post={x} />
+            </div>
           ))}
         </div>
         <div ref={loaderElementRef} />

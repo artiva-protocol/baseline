@@ -19,7 +19,7 @@ const NFTMarketView = ({ nft }: { nft?: NFTObject }) => {
   const auction = useFindAuction(secondary);
   const ask = useFindAsk(secondary);
 
-  const border = "flex flex-col border border-gray-200 rounded-3xl p-6";
+  const border = "flex flex-col border border-gray-300 rounded-md p-6";
 
   const askView = () => {
     if (!ask?.amount) return <Fragment />;
